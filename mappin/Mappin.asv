@@ -2,10 +2,33 @@ function Mappin
 
 clear ; clc ; close
 Mapps = [0 0];
-h = figure();
-for iiii = 1:4 
-    
+coord = [];
+%% first figure
+h = figure('menubar','none','units','norm','pos',[0.3 0.3 0.4 0.4],'numbertitle','off');
+coor = {'lat1','lat2';'long1','long2'};
+cooor = [30.0707,30.0711;31.1098,31.1898];
+for iiii = 1:2
+    for jjjj = 1:2
+        uicontrol('style','text','units','norm','pos',[-0.19+iiii/3 0.08+jjjj/4 0.08 0.05],'str',coor{iiii,jjjj})
+        k(iiii,jjjj) = uicontrol('style','edit','units','norm','pos'...
+            ,[-0.15+iiii/3 0.1+jjjj/3.5 0.3 0.2],'call',{@submit,iiii+jjjj}...
+            ,'str',cooor(iiii,jjjj));
+    end
 end
+    function submit(varargin)
+        
+        switch varargin{3}
+            case 4
+                uicontrol('units','norm','pos',[0.4 0.2 0.2 0.1],'call',{@map})
+                
+        end
+        for lon = 1:2
+            for lat = 1:2
+                coord(lat,lon) = str2double(get(k(lat,lon),'str'));
+            end
+        end
+    end
+%% mapping main program
     function map(varargin)
         close(h)
         c = [0.15 0.5 0.15];
@@ -40,7 +63,7 @@ end
         chaar = {'A'  'B'  'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S'} ;
 
         axes('units','norm','pos',[0.05 0.05 0.5 0.8],...
-        'xlim',[latt1 latt2],'ylim',[long1 long2],'color',C,'box','on'...
+        'xlim',[1 20],'ylim',[1 20],'color',C,'box','on'...
         ,'xgrid','on','ygrid','on','gridlinestyle','-'...
           ,'xcolor',c,'ycolor',c...
           ,'XTick',1:19,'Ytick',1:19,'Xticklabel',chaar); 
@@ -77,7 +100,8 @@ end
                         end
 
 
-                    case 4
+                    case 4 % table figure
+                        
 
                          figure('menubar','none','numbertitle','off','units','norm','pos',[0.625 0.1 0.15 0.8],'color'...
                                          ,C);
@@ -97,18 +121,18 @@ end
                                 ,'fontsize',14);
                             end
                         end
-                    case 5
+                    case 5 %reset
 
                         cla
                         Mapps= [0 0];
 
-                   case 2 
+                   case 2 % X pos
                         x = get(Buttt(1),'str');
                         xx = str2double(x{1});
                         X = floor(xx);
                         set(errorr , 'str','setting X position')
 
-                   case 3
+                   case 3 % Y pos
 
                        y = get(Buttt(2),'str');
                        yy = str2double(y);
@@ -126,7 +150,7 @@ end
                 end
 
         end
-
+%%  condition off signal
         Navv = [];
         y = 1 ;
         x = 1 ;

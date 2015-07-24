@@ -1,4 +1,4 @@
-function GPS_fix_data(COMPort ,BaudRate,swt)
+function [lat lon]=GPS_fix_data(COMPort ,BaudRate,swt)
 lon1 = [];lat1 = [];
 lon2 = [];lat2 = [];
 lon3 = [];lat3 = [];
@@ -60,6 +60,8 @@ connnect(swt)
 %                          timeaclock = digitss(1);
                          lat1 = vertcat(lat1,deg2decimal(digitss(2),digitss(3)));
                          lon1 = vertcat(lon1,deg2decimal(digitss(4),digitss(5)));
+                         lon = lon1;
+                         lat = lat1;
                       %   hieght = [digitss(9) digitss(10)];
                      end
                 case 'GSA'  %Satellite status
@@ -109,6 +111,8 @@ connnect(swt)
                      else
                          lon2 = vertcat(lon2,deg2decimal(digitss(4),digitss(5)));
                          lat2 = vertcat(lat2,deg2decimal(digitss(2),digitss(3)));
+                         lon = lon2;
+                         lat = lat2;
                      end
                 case 'GLL'
                     
@@ -122,6 +126,8 @@ connnect(swt)
                      else
                          lon3 = vertcat(lon3,deg2decimal(digitss(3),digitss(4)));
                          lat3 = vertcat(lat3,deg2decimal(digitss(1),digitss(2)));
+                         lon = lon3;
+                         lat = lat3;
                      end
                      
             end
@@ -135,6 +141,7 @@ connnect(swt)
                 %latit3 = mean(lat3)
                % coord3 = sprintf('%f,%f,blue',latit3,longi3);
                % wmmaker(latit3,longi3,'zoom',19,'marker',coord3)
+               
                 if length(lon1) > 10 && length(lat1) > 10 || length(lon2) > 10  && length(lat2) > 10||length(lon3) > 10  && length(lat3) > 10
                     longi(1) = mean(lon1);
                     latit(1) = mean(lat1);
@@ -161,10 +168,10 @@ connnect(swt)
         save('fix_data.mat')
          toc
     end
-function decci = deg2decimal(bef,aft)
-        
-        decci =  floor(bef/100) +((((bef/100)-floor(bef/100))*100)+aft/1e+5)/60;
-end
+% function decci = deg2decimal(bef,aft)
+%         
+%         decci =  floor(bef/100) +((((bef/100)-floor(bef/100))*100)+aft/1e+5)/60;
+% end
 end
 % radians = degrees * PI / 180
 % var R = 6371; // km
