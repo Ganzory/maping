@@ -279,19 +279,19 @@ connnect(swt)
                          lon1 = vertcat(lon1,deg2decimal(digitss(4),digitss(5),0));
                          lon = lon1;
                          lat = lat1;
+                         lon = fscalef(lon,reed(3),reed(4),1,20);
                          
-                         ang1=angleN(coord(1,1),coord(3,1),lat,lon);
-                         
-                         dist=distancee(lat,coord(1,1),lon,coord(3,1));
-                         
-                         dist1 = fscalef(dist,coord(1,1),coord(1,2),1,20);
-                         
-                         ang2=angleN(coord(1,1),coord(3,1),coord(1,2),coord(3,2)); 
-                         
-                         [lat11,lon11] = position(dist1,ang1,ang2);
-                         
-                         plot(lat11,lon11,'sw');
-                         %if length(lon) > 3 && 
+                         lat = fscalef(lat,reed(1),reed(2),1,20);
+                    %    if length(lon) > 3 && length(lon) < 10
+                     %       lonn = mean(lon(end-3:end));
+                      %      latt = mean(lat(end-3:end));
+                       %     plot(latt,lonn,'sr');
+                        %else
+                            if length(lon) > 10
+                             lonn = mean(lon(length(lon)-6:end));
+                             latt = mean(lat(length(lon)-6:end));
+                             plot(latt,lonn,'sb');
+                            end
                       %   hieght = [digitss(9) digitss(10)];
                      end
                      
@@ -311,26 +311,19 @@ connnect(swt)
                          lat2 = vertcat(lat2,deg2decimal(digitss(2),digitss(3),0));
                          lon = lon2;
                          lat = lat2;
-                         %lat = fscalef(lat,reed(1),reed(2),1,20);
+                         lon = fscalef(lon,reed(3),reed(4),1,20);
+                         
+                         lat = fscalef(lat,reed(1),reed(2),1,20);
                         % if length(lon) > 3 && length(lon) < 10
                             %lonn = mean(lon(end-3:end));
                            % latt = mean(lat(end-3:end));
                           %  plot(latt,lonn,'sr');
                          %else
-                         
-                         ang1=angleN(coord(1,1),coord(3,1),lat,lon);
-                         
-                         dist=distancee(lat,coord(1,1),lon,coord(3,1));
-                         
-                         dist1 = fscalef(dist,coord(1,1),coord(1,2),1,20);
-                         
-                         ang2=angleN(coord(1,1),coord(3,1),coord(1,2),coord(3,2)); 
-                         
-                         [lat11,lon11] = position(dist1,ang1,ang2);
-                         
-                         plot(lat11,lon11,'sw');
-                         %if length(lon) > 3 && 
-                         %end
+                         if length(lon) > 10
+                             lonn = mean(lon(length(lon)-6:end));
+                             latt = mean(lat(length(lon)-6:end));
+                             plot(latt,lonn,'sb');
+                         end
                      end
                 case 'GLL'
                     
@@ -347,15 +340,10 @@ connnect(swt)
                          
                          lat = lat3;
                          ang1=angleN(coord(1,1),coord(3,1),lat,lon);
-                         
                          dist=distancee(lat,coord(1,1),lon,coord(3,1));
-                         
                          dist1 = fscalef(dist,coord(1,1),coord(1,2),1,20);
-                         
                          ang2=angleN(coord(1,1),coord(3,1),coord(1,2),coord(3,2)); 
-                         
                          [lat11,lon11] = position(dist1,ang1,ang2);
-                         
                          plot(lat11,lon11,'sw');
                          %if length(lon) > 3 && length(lon) < 10
                             %lonn = mean(lon(end-3:end));
@@ -365,7 +353,7 @@ connnect(swt)
                         % if length(lon) > 10
                          %    lonn = mean(lon(length(lon)-6:end));
                           %   latt = mean(lat(length(lon)-6:end));
-                          %   plot(latt,lonn,'sb');
+                             plot(latt,lonn,'sb');
                         % end
                      end
                     

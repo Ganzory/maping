@@ -59,9 +59,9 @@ connnect(swt)
                             latt = mean(lat(end-3:end));
                             plot(latt,lonn,'sr');
                          elseif length(lon) > 10
-                             lonn = mean(lon(end-length(lon)/7:end));
-                            latt = mean(lat(end-length(lat)/7:end));
-                            plot(latt,lonn,'sr');
+                             lonn = mean(lon(end-floor(3*length(lon)/4):end));
+                             latt = mean(lat(end-floor(3*length(lat)/4):end));
+                             plot(latt,lonn,'sr');
                          end
                       %   hieght = [digitss(9) digitss(10)];
                      end
@@ -89,9 +89,9 @@ connnect(swt)
                             latt = mean(lat(end-3:end));
                             plot(latt,lonn,'sr');
                          elseif length(lon) > 10
-                             lonn = mean(lon(end-length(lon)/7:end));
-                            latt = mean(lat(end-length(lat)/7:end));
-                            plot(latt,lonn,'sr');
+                             lonn = mean(lon(end-floor(3*length(lon)/4):end));
+                             latt = mean(lat(end-floor(3*length(lat)/4):end));
+                             plot(latt,lonn,'sr');
                          end
                      end
                 case 'GLL'
@@ -115,9 +115,9 @@ connnect(swt)
                             latt = mean(lat(end-3:end));
                             plot(latt,lonn,'sr');
                          elseif length(lon) > 10
-                             lonn = mean(lon(end-length(lon)/7:end));
-                            latt = mean(lat(end-length(lat)/7:end));
-                            plot(latt,lonn,'sr');
+                             lonn = mean(lon(end-floor(3*length(lon)/4):end));
+                             latt = mean(lat(end-floor(3*length(lat)/4):end));
+                             plot(latt,lonn,'sr');
                          end
                      end
                      
@@ -128,5 +128,4 @@ connnect(swt)
         end
     end
     
-end
 end
